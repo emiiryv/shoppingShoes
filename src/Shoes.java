@@ -16,6 +16,8 @@ public class Shoes {
     public static Shoes[] shoes(){
         Shoes[] shoeList = new Shoes[100];
         shoeList[0] = new Shoes(1,"Sneaker","Nike Dunk Low",43,3000);
+        shoeList[1] = new Shoes(2,"Sneaker", "Adidas Ozweego",44,1500);
+        shoeList[2] = new Shoes(3,"Slapper","Yeezys",38,1000);
         return shoeList;
     }
 

@@ -30,11 +30,9 @@ public class ShoppingBagPage extends Page {
                     totalPrice += shoppingBag.getPrice();
                 }
 
-                // Kullanıcının bakiyesini kontrol et
                 if (getUser().getUserBalance() < totalPrice) {
                     System.out.println("Yetersiz bakiye! Alışveriş işlemi gerçekleştirilemedi.");
                 } else {
-                    // Kullanıcının bakiyesi yeterli, alışveriş işlemini tamamla
                     List<BoughtShoes> boughtShoesList = new ArrayList<>();
 
                     for (ShoppingBag shoppingBag : shoppingBagList) {
@@ -42,17 +40,14 @@ public class ShoppingBagPage extends Page {
                                 shoppingBag.getSize(), shoppingBag.getPrice()));
                     }
 
-                    // Satın alınan ürünleri ekrana bastırabilirsin
                     System.out.println("Satın Alınan Ürünler:");
                     for (BoughtShoes boughtShoe : boughtShoesList) {
                         System.out.println("ID: " + boughtShoe.getId() + " - " + boughtShoe.getName() + " - " +
                                 boughtShoe.getSize() + " Numara - Fiyat: " + boughtShoe.getPrice() + " TL");
                     }
 
-                    // Bakiyeden ücreti düşür
                     getUser().deductBalance(totalPrice);
 
-                    // ShoppingBag'den satın alınan ürünleri çıkar
                     shoppingBagList.clear();
                 }
 

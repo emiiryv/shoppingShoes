@@ -24,7 +24,6 @@ public class ShoppingPage extends Page{
             }
             System.out.println("Bu ürünlerden favorilere eklemek istediğiniz var mı? (Evet için 'e')");
             String addFav = input.next().toLowerCase();
-            // ShoppingPage içinde
             if (addFav.equals("e")) {
                 System.out.print("Favorilere eklemek istediğiniz ürünün ID'sini giriniz : ");
                 int giveID = input.nextInt();

@@ -28,7 +28,7 @@ public class ShoppingBag {
                 favShoe.getName(), favShoe.getSize(), favShoe.getPrice());
         shoppingBagList.add(shoppingBagItem);
 
-        // Satın alındığında BoughtShoes listesine de ekleyin
+        // Satın alındığında BoughtShoes listesine de eklenir
         BoughtShoes.addToBoughtShoes(shoppingBagItem);
     }
 

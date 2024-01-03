@@ -14,6 +14,21 @@ public class User {
             System.out.println("Satın alma işlemi başarıyla gerçekleştirildi. Kalan bakiyeniz: " + userBalance);
         }
     }
+    /*public class UserMail {
+        private String email;
+
+        public UserMail(String email) {
+            this.email = email;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+    }*/
     public String getUserName() {
         return userName;
     }
@@ -35,6 +50,7 @@ public class User {
         System.out.println("Kullanıcı:\t"+this.userName+
                 " |\tBakiyeniz:\t"+this.userBalance);
     }
+
 
 
 }
