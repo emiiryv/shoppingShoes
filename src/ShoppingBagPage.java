@@ -18,50 +18,60 @@ public class ShoppingBagPage extends Page {
                 System.out.println("Sepetiniz boş. Alışverişinizi tamamlamak için önce ürün ekleyin.");
                 return true;
             }
-            System.out.println("Alışverişinizi tamamlamak istiyor musunuz?(Bakiyeniz :" + getUser().getUserBalance() +")");
-            System.out.print("(Evet için 'e') : ");
+
+            System.out.println("Alışverişinizi tamamlamak istiyor musunuz?(Bakiyeniz :" + getUser().getUserBalance() + ")");
+            System.out.println("(Evet için 'e')");
             String finishShop = input.next().toLowerCase();
             if (finishShop.equals("e")) {
                 List<ShoppingBag> shoppingBagList = ShoppingBag.getShoppingBagList();
-                List<BoughtShoes> boughtShoesList = new ArrayList<>();
-
                 double totalPrice = 0;
 
                 for (ShoppingBag shoppingBag : shoppingBagList) {
-                    boughtShoesList.add(new BoughtShoes(shoppingBag.getId(), shoppingBag.getShoeType(), shoppingBag.getName(),
-                            shoppingBag.getSize(), shoppingBag.getPrice()));
                     totalPrice += shoppingBag.getPrice();
                 }
 
-                // Satın alınan ürünleri ekrana bastırabilirsiniz
-                System.out.println("Satın Alınan Ürünler:");
-                for (BoughtShoes boughtShoe : boughtShoesList) {
-                    System.out.println("ID: " + boughtShoe.getId() + " - " + boughtShoe.getName() + " - " +
-                            boughtShoe.getSize() + " Numara - Fiyat: " + boughtShoe.getPrice() + " TL");
+                // Kullanıcının bakiyesini kontrol et
+                if (getUser().getUserBalance() < totalPrice) {
+                    System.out.println("Yetersiz bakiye! Alışveriş işlemi gerçekleştirilemedi.");
+                } else {
+                    // Kullanıcının bakiyesi yeterli, alışveriş işlemini tamamla
+                    List<BoughtShoes> boughtShoesList = new ArrayList<>();
+
+                    for (ShoppingBag shoppingBag : shoppingBagList) {
+                        boughtShoesList.add(new BoughtShoes(shoppingBag.getId(), shoppingBag.getShoeType(), shoppingBag.getName(),
+                                shoppingBag.getSize(), shoppingBag.getPrice()));
+                    }
+
+                    // Satın alınan ürünleri ekrana bastırabilirsin
+                    System.out.println("Satın Alınan Ürünler:");
+                    for (BoughtShoes boughtShoe : boughtShoesList) {
+                        System.out.println("ID: " + boughtShoe.getId() + " - " + boughtShoe.getName() + " - " +
+                                boughtShoe.getSize() + " Numara - Fiyat: " + boughtShoe.getPrice() + " TL");
+                    }
+
+                    // Bakiyeden ücreti düşür
+                    getUser().deductBalance(totalPrice);
+
+                    // ShoppingBag'den satın alınan ürünleri çıkar
+                    shoppingBagList.clear();
                 }
 
-                // Bakiyeden ücreti düşür
-                getUser().deductBalance(totalPrice);
-
-                // ShoppingBag'den satın alınan ürünleri çıkar
-                shoppingBagList.clear();
             }
-
         }
-        boolean exitPage = false;
-        do {
-            System.out.print("Başka bir sayfaya geçmek istiyor musunuz? (Evet için 'e', Hayır için 'h') : ");
-            String answer = input.next().toLowerCase();
+            boolean exitPage = false;
+            do {
+                System.out.print("Başka bir sayfaya geçmek istiyor musunuz? (Evet için 'e', Hayır için 'h') : ");
+                String answer = input.next().toLowerCase();
 
-            if (answer.equals("h")) {
-                return false;
-            } else if (answer.equals("e")) {
-                exitPage = true;
-            } else {
-                System.out.println("Geçerli bir yanıt giriniz.");
-            }
-        } while (!exitPage);
+                if (answer.equals("h")) {
+                    return false;
+                } else if (answer.equals("e")) {
+                    exitPage = true;
+                } else {
+                    System.out.println("Geçerli bir yanıt giriniz.");
+                }
+            } while (!exitPage);
 
-        return true;
+            return true;
+        }
     }
-}
